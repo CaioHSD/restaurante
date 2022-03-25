@@ -1,0 +1,69 @@
+title {
+	color: blue;
+}
+
+h1 {
+	text-align: center;
+	color: blue;
+	font-family: sans-serif;
+}
+
+form {
+	width: 18%;
+	margin: auto;
+	font-family: sans-serif;
+	background-color: #80bfff;
+	border-radius: 3px;
+}
+
+fieldset {
+	border-radius: 3px;
+}
+
+input[type="name"], input[type="password"], input[type="text"], input[type="email"]
+	{
+	display: block;
+	width: 100%;
+	padding: 5px;
+	box-sizing: border-box;
+	border-radius: 5px;
+}
+
+input:focus {
+	background-color: #b3d1ff;
+	border: 2px solid blue;
+	outline: none
+}
+
+td {
+	margin-top: 20px;
+	display: inline-block;
+	padding: 5px;
+}
+
+input[type="submit"] {
+	padding: 5px;
+	border-radius: 10px;
+	margin-top: 10px;
+	background: #66b3ff;
+}
+
+button {
+	font-family: sans-serif;
+	border-radius: 10px;
+	padding: 7px;
+	background-color: #b366ff;
+	margin-left: 200px;
+}
+
+.mensagemErro {
+	padding: 10px;
+	background-color: #ff4d4d;
+}
+
+.mensagemSucesso {
+	padding: 5px;
+	background-color: #80ff80;
+}
+
+

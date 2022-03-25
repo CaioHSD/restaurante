@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+</head>
+<body>
+	<span class="mensagemErro"
+		th:if="${not #strings.isEmpty(mensagemErro)}"
+		th:text="${mensagemErro}"></span>
+
+	<span class="mensagemSucesso"
+		th:if="${not #strings.isEmpty(mensagemSucesso)}"
+		th:text="${mensagemSucesso}"></span>
+
+</body>
+</html>

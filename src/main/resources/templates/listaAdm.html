@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Listagem de Administradores</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"
+	media="screen,projection" />
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+	<!--JavaScript at end of body for optimized loading-->
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<style>
+.pagination {
+	margin-top: 30%;
+	margin-left: 45%
+}
+</style>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>E-mail</th>
+				<th>Alterar</th>
+				<th>Excluir</th>
+
+			</tr>
+
+		</thead>
+		<tbody>
+			<tr th:each="adm:${admins}">
+				<td th:text="${adm.id}"></td>
+				<td th:text="${adm.nome}"></td>
+				<td th:text="${adm.email}"></td>
+				
+				<th><a th:href="@{/alterarAdm(id=${adm.id})}">Alterar</a></th>
+			<th><a th:attr="onclick=|return confirm('Deseja excluir o ID: ${adm.id}')|"
+			th:href="@{/excluirAdm(id=${adm.id})}">Excluir</a></th>	
+				
+				
+			</tr>
+
+		</tbody>
+
+	</table>
+	<ul class="pagination">
+		<li th:class="${pagAtual==1 ? 'disabled' : 'waves-effect'}"><a
+			th:href="${pagAtual > 1 ? pagAtual - 1 : '#'}"><i
+				class="material-icons">chevron_left</i></a></li>
+		
+		<li th:class="${pagAtual == p ? 'active blue' : 'waves effect'}" th:each="p:${numPaginas}"><a th:href="${p}"><span
+				th:text="${p}"></span></a></li>
+
+		<li
+			th:class="${pagAtual == totalPages ? 'disabled' : 'waves-effect' }"><a
+			th:href="${pagAtual < totalPages ? pagAtual + 1 : '#'}"><i
+				class="material-icons">chevron_right</i></a></li>
+	</ul>
+
+
+
+
+</body>
+</html>

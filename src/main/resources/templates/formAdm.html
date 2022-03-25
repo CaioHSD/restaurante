@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="estilo_form.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<title>Cadastro de Administrador</title>
+</head>
+<body>
+	<h1>Cadastro</h1>
+	<form method="post" action="salvarAdmin">
+	<input type="hidden" name="id">
+		<fieldset>
+			<table>
+				
+				<tr>
+					<td><i class="material-icons">assignment_ind</i>Nome:</td>
+					<td><input type="text" name="nome" th:value="${admin?.nome}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">email</i>E-mail:</td>
+					<td><input type="email" name="email" th:value="${admin?.email}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">https</i>Senha:</td>
+					<td><input type="password" name="senha"></td>
+				</tr>
+
+				<tr>
+					<td><button type="submit">Salvar</button></td>
+				</tr>
+
+			</table>
+			<div th:replace="fragments/mensagem"></div>
+
+		</fieldset>
+	</form>
+	<br />
+
+
+</body>
+</html>
