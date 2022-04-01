@@ -36,5 +36,9 @@ public class Administrador {
 		this.senha = HashUtil.hash(senha);	
 				
 	}
+	//método que "seta" o hash na senha
+	public void setSenhaComHash(String hash) {
+		this.senha = hash;
+	}
 	
 }

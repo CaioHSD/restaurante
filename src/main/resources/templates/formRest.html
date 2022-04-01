@@ -5,26 +5,26 @@
 <link rel="stylesheet" href="estilo_form.css" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-<title>Cadastro de Administrador</title>
+<title>Cadastre de restautaurante</title>
 </head>
-<body>
+	<body>
 	<h1>Cadastro</h1>
-	<form method="post" action="salvarAdmin">
-	<input type="hidden" name="id" th:value="${admin?.id}">
+	<form method="post" action="salvarRest">
+	<input type="hidden" name="id" th:value="${rest?.id}">
 		<fieldset>
 			<table>
 				
 				<tr>
 					<td><i class="material-icons">assignment_ind</i>Nome:</td>
-					<td><input type="text" name="nome" th:value="${admin?.nome}"></td>
+					<td><input type="text" name="nome" th:value="${rest?.nome}"></td>
 				</tr>
 				<tr>
-					<td><i class="material-icons">email</i>E-mail:</td>
-					<td><input type="email" name="email" th:value="${admin?.email}"></td>
+					<td><i class="material-icons">email</i>Descrição:</td>
+					<td><input type="text" name="descricao" th:value="${rest?.descricao}"></td>
 				</tr>
 				<tr>
-					<td><i class="material-icons">https</i>Senha:</td>
-					<td><input type="password" name="senha"></td>
+					<td><i class="material-icons">https</i>Palavra-Chave:</td>
+					<td><input type="text" name="palavrasChave" th:value="${rest?.palavrasChave}"></td>
 				</tr>
 
 				<tr>
@@ -40,4 +40,7 @@
 
 
 </body>
+
+
+
 </html>
