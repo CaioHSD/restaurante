@@ -1,4 +1,4 @@
-package br.com.sp.restaurante.restautaurante.model;
+package br.com.sp.restaurante.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class TipoRestautaurante {
+public class TipoRestaurante {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

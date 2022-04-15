@@ -1,4 +1,4 @@
-package br.com.sp.restaurante.restautaurante.controller;
+package br.com.sp.restaurante.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.sp.restaurante.restautaurante.model.Administrador;
-import br.com.sp.restaurante.restautaurante.model.TipoRestautaurante;
-import br.com.sp.restaurante.restautaurante.repository.TipoRestautauranteRepository;
+
+import br.com.sp.restaurante.model.TipoRestaurante;
+import br.com.sp.restaurante.repository.TipoRestauranteRepository;
 
 @Controller
-public class TipoRestatautauranteController {
+public class TipoRestauranteController {
 
 	@Autowired
-	private TipoRestautauranteRepository repository;
+	private TipoRestauranteRepository repository;
 
 	@RequestMapping("formularioRest")
 	public String form() {
@@ -35,7 +35,7 @@ public class TipoRestatautauranteController {
 	}
 
 	@RequestMapping(value = "salvarRest", method = RequestMethod.POST)
-	public String salvarRest(@Valid TipoRestautaurante rest, BindingResult result, RedirectAttributes attr) {
+	public String salvarRest(@Valid TipoRestaurante rest, BindingResult result, RedirectAttributes attr) {
 	
 		try {
 			// salva no banco de dados o adm
@@ -59,7 +59,7 @@ public class TipoRestatautauranteController {
 				PageRequest pageable = PageRequest.of(page - 1, 5, Sort.by(Sort.Direction.ASC, "nome"));
 
 				// cria um page de Administrador através dos parametros passados ao repository
-				Page<TipoRestautaurante> pagina = repository.findAll(pageable);
+				Page<TipoRestaurante> pagina = repository.findAll(pageable);
 
 				// adiciona a model á lista com os admins
 				model.addAttribute("restautaurantes", pagina.getContent());
@@ -96,7 +96,7 @@ public class TipoRestatautauranteController {
 
 	@RequestMapping("alterarRest")
 	public String alterarRest(Long id, Model model) {
-		TipoRestautaurante rest = repository.findById(id).get();
+		TipoRestaurante rest = repository.findById(id).get();
 		model.addAttribute("rest", rest);
 		return "forward:formularioRest";
 

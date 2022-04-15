@@ -1,4 +1,4 @@
-package br.com.sp.restaurante.restautaurante.model;
+package br.com.sp.restaurante.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-import br.com.sp.restaurante.restautaurante.util.HashUtil;
+import br.com.sp.restaurante.util.HashUtil;
 import lombok.Data;
 
 //cria getters e setters

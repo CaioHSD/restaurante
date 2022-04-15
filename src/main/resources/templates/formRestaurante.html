@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="estilo_form.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<title>Cadastrar Restaurante</title>
+</head>
+<body>
+	<h1>Cadastre o seu restaurante:</h1>
+	<form method="post" action="salvarRestaurante"
+		enctype="multipart/form-data">
+		<input type="hidden" name="id">
+		<fieldset>
+			<table>
+
+				<tr>
+					<td><i class="material-icons">assignment</i>Nome:</td>
+					<td><input type="text" name="nome"
+						th:value="${restaurante?.nome}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">location_searching</i>CEP:</td>
+					<td><input type="text" name="cep"
+						th:value="${restaurante?.cep}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">my_location</i>Endereço:</td>
+					<td><input type="text" name="endereco"
+						th:value="${restaurante?.endereco}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">filter_1</i>Número:</td>
+					<td><input type="text" name="numero"
+						th:value="${restaurante?.numero}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">format_align_left</i>Bairro:</td>
+					<td><input type="text" name="bairro"
+						th:value="${restaurante?.bairro}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">location_on</i>Cidade:</td>
+					<td><input type="text" name="cidade"
+						th:value="${restaurante?.cidade}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">assignment</i>Complemento:</td>
+					<td><input type="text" name="complemento"
+						th:value="${restaurante?.complemento}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">assignment</i>Descrição:</td>
+					<td><input type="text" name="descricao"
+						th:value="${restaurante?.descricao}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">access_time</i>Horário:</td>
+					<td><input type="text" name="horario"
+						th:value="${restaurante?.horario}"></td>
+				</tr>
+
+				<tr>
+					<td><i class="material-icons">public</i>Estado:</td>
+					<td><input type="text" name="estado"
+						th:value="${restaurante?.estado}"></td>
+				</tr>
+					<tr>
+					<select>
+						<option >FastFood</option>
+					</select>
+						</tr>
+				<tr>
+					<td><i class="material-icons">payment</i>Formas de pagamento:</td>
+					<td><input type="text" name="formasPagamento" value="true"
+						th:value="${restaurante?.formasPagamento}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">monetization_on</i>Preço:</td>
+					<td><input type="range" name="preco" min="1" max="6"
+						th:value="${restaurante?.preco}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">motorcycle</i>Delivery:</td>
+					<td><input type="checkbox" name="delivery"
+						th:checked="${restaurante?.delivery}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">accessible</i>Acessibilidade:</td>
+					<td><input type="checkbox" name="acessibilidade"
+						th:checked="${restaurante?.acessibilidade}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">directions_car</i>Drive-Thru:</td>
+					<td><input type="checkbox" name="drive"
+						th:checked="${restaurante?.driveThru}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">local_parking</i>Estacionamento:</td>
+					<td><input type="checkbox" name="estacionamento"
+						th:checked="${restaurante?.estacionamento}"></td>
+				</tr>
+				<tr>
+					<td><i class="material-icons">toys</i>Playground:</td>
+					<td><input type="checkbox" name="playground"
+						th:checked="${restaurante?.playground}"></td>
+				</tr>
+
+				<tr>
+					<td><i class="material-icons">photo_camera</i>Fotos:</td>
+					<td><input type="file" name="fileFotos" multiple
+						accept="image/*"></td>
+				</tr>
+
+				<tr th:if="${restaurante?.fotos?.length > 0}">
+					<td>Fotos Cadastradas:</td>
+					<td>
+						<ul id="lista">
+							<li th:each=" fotos : ${restaurante?.verFotos()}"><a
+								th:href="${fotos}" target="blank"><img th:src="${fotos}"></a>
+								<a
+								th:href="@{/excluirFotos(idRest=${restaurante?.id}, numFoto=${i.index})}"></a>
+
+
+								<input type="hidden" th:value="${restaurante?.fotos}"
+								name="fotos" /></li>
+						</ul>
+					</td>
+				</tr>
+
+
+				<tr>
+					<td><button type="submit">Salvar</button></td>
+				</tr>
+
+
+			</table>
+			<div th:replace="fragments/mensagem"></div>
+
+		</fieldset>
+	</form>
+	<br />
+
+
+
+</body>
+</html>

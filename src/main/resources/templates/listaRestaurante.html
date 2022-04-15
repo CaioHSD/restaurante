@@ -31,18 +31,27 @@
 	<header th:replace="fragments/padrao::cabecalho"></header>
 	<table>
 	
-	<h5>Buscar restaurante pela palavra-chave</h5>
-		<form action="/buscarRest">
-		<label>Palavra-Chave:</label>
-		<input type="search" name="restautaurante">
-		<button type="submit">Buscar</button>
-	</form>
 		<thead>
 			<tr>
 				<th>Id</th>
 				<th>Nome</th>
+				<th>CEP</th>
+				<th>Endereço</th>
+				<th>Número</th>
+				<th>Bairro</th>
+				<th>Cidade</th>
+				<th>Complemento</th>
 				<th>Descrição</th>
-				<th>Palavras-Chave</th>
+				<th>Horário</th>
+				<th>Estado</th>
+				<th>Formas de pagamento</th>
+				<th>Preço</th>
+				<th>Delivery</th>
+				<th>Acessibilidade</th>
+				<th>Drive-Thru</th>
+				<th>Estacionamento</th>
+				<th>Playground</th>
+				<th>Fotos</th>
 				<th>Alterar</th>
 				<th>Excluir</th>
 
@@ -50,16 +59,31 @@
 
 		</thead>
 		<tbody>
-			<tr th:each="rest:${restautaurantes}">
-				<td th:text="${rest.id}"></td>
-				<td th:text="${rest.nome}"></td>
-				<td th:text="${rest.descricao}"></td>
-				<td th:text="${rest.palavrasChave}"></td>
+			<tr th:each="restaurante:${restaurantes}">
+				<td th:text="${restaurante.id}"></td>
+				<td th:text="${restaurante.nome}"></td>
+				<td th:text="${restaurante.cep}"></td>
+				<td th:text="${restaurante.endereco}"></td>
+				<td th:text="${restaurante.numero}"></td>
+				<td th:text="${restaurante.bairro}"></td>
+				<td th:text="${restaurante.cidade}"></td>
+				<td th:text="${restaurante.complemento}"></td>
+				<td th:text="${restaurante.descricao}"></td>
+				<td th:text="${restaurante.horario}"></td>
+				<td th:text="${restaurante.estado}"></td>
+				<td th:text="${restaurante.formasPagamento}"></td>
+				<td th:text="${restaurante.preco}"></td>
+				<td th:text="${restaurante.delivery}"></td>
+				<td th:text="${restaurante.acessibilidade}"></td>
+				<td th:text="${restaurante.driveThru}"></td>
+				<td th:text="${restaurante.estacionamento}"></td>
+				<td th:text="${restaurante.playground}"></td>
+				<td th:text="${restaurante.fotos}"></td>
 
-				<th><a th:href="@{/alterarRest(id=${rest.id})}">Alterar</a></th>
+				<th><a th:href="@{/alterarRestaurante(id=${restaurante.id})}">Alterar</a></th>
 				<th><a
-					th:attr="onclick=|return confirm('Deseja excluir o ID: ${rest.id}')|"
-					th:href="@{/excluirRest(id=${rest.id})}">Excluir</a></th>
+					th:attr="onclick=|return confirm('Deseja excluir o ID: ${restaurante.id}')|"
+					th:href="@{/excluirRestaurante(id=${restaurante.id})}">Excluir</a></th>
 
 			</tr>
 

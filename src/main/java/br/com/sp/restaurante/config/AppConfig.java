@@ -1,4 +1,4 @@
-package br.com.sp.restaurante.restautaurante.config;
+package br.com.sp.restaurante.config;
 
 import javax.sql.DataSource;
 

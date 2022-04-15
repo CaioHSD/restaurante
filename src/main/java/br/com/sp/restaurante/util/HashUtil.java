@@ -1,4 +1,4 @@
-package br.com.sp.restaurante.restautaurante.util;
+package br.com.sp.restaurante.util;
 
 import java.nio.charset.StandardCharsets;
 

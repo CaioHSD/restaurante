@@ -9,7 +9,8 @@ h1 {
 }
 
 form {
-	width: 18%;
+	display: flex;
+	width: 20%;
 	margin: auto;
 	font-family: sans-serif;
 	background-color: #80bfff;
@@ -18,11 +19,12 @@ form {
 
 fieldset {
 	border-radius: 3px;
+
 }
 
 input[type="name"], input[type="password"], input[type="text"], input[type="email"]
 	{
-	display: block;
+	display: flex;
 	width: 100%;
 	padding: 5px;
 	box-sizing: border-box;
@@ -32,7 +34,7 @@ input[type="name"], input[type="password"], input[type="text"], input[type="emai
 input:focus {
 	background-color: #b3d1ff;
 	border: 2px solid blue;
-	outline: none
+	outline: none;
 }
 
 td {
@@ -52,13 +54,14 @@ button {
 	font-family: sans-serif;
 	border-radius: 10px;
 	padding: 7px;
-	background-color: #b366ff;
-	margin-left: 200px;
+	width: 95px;
+	background-color: #ff4d4d;
+	margin-left: 250%;
 }
 
 .mensagemErro {
 	padding: 10px;
-	background-color: #ff4d4d;
+	background-color: #ff8080;
 }
 
 .mensagemSucesso {

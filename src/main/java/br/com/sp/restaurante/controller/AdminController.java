@@ -1,8 +1,9 @@
-package br.com.sp.restaurante.restautaurante.controller;
+package br.com.sp.restaurante.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.sp.restaurante.restautaurante.model.Administrador;
-import br.com.sp.restaurante.restautaurante.repository.AdminRepository;
-import br.com.sp.restaurante.restautaurante.util.HashUtil;
+import br.com.sp.restaurante.model.Administrador;
+import br.com.sp.restaurante.repository.AdminRepository;
+import br.com.sp.restaurante.util.HashUtil;
 
 @Controller
 public class AdminController {
@@ -128,6 +129,22 @@ public class AdminController {
 	public String excluir(Long id) {
 		repository.deleteById(id);
 		return "redirect:listaAdm/1";
+	}
+	@RequestMapping("login")
+	public String login(Administrador admLogin, RedirectAttributes attr, HttpSession session) {
+		//buscar o Administrador no banco de dados
+		Administrador admin = repository.findByEmailAndSenha(admLogin.getEmail(), admLogin.getSenha());
+		if(admin == null) {
+			attr.addFlashAttribute("mensagemErro", "Login e/ou senha inválido(s)");
+			return "redirect:/";
+		}else {
+			//salva o administrador na sessão
+			session.setAttribute("usuarioLogado", admin);
+			return "redirect:/listarRestaurante/1";
+			
+		}
+		
+		
 	}
 
 }
