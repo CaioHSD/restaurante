@@ -68,6 +68,14 @@
 					<tr>
 					<select>
 						<option >FastFood</option>
+						<option >Comida Caseira</option>
+						<option >Comida Japonesa</option>
+						<option >Comida Árabe</option>
+						<option > Comida Mexicana</option>
+						<option >Hamburgueria</option>
+						<option >Pastelaria</option>
+						<option >Pizzaria</option>
+						
 					</select>
 						</tr>
 				<tr>
@@ -116,7 +124,7 @@
 					<td>Fotos Cadastradas:</td>
 					<td>
 						<ul id="lista">
-							<li th:each=" fotos : ${restaurante?.verFotos()}"><a
+							<li th:each=" fotos, i : ${restaurante?.verFotos()}"><a
 								th:href="${fotos}" target="blank"><img th:src="${fotos}"></a>
 								<a
 								th:href="@{/excluirFotos(idRest=${restaurante?.id}, numFoto=${i.index})}"></a>

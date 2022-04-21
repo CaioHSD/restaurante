@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.sp.restaurante.annotation.Publico;
 import br.com.sp.restaurante.model.Administrador;
 import br.com.sp.restaurante.repository.AdminRepository;
 import br.com.sp.restaurante.util.HashUtil;
@@ -51,17 +52,17 @@ public class AdminController {
 
 		// verificar se a senha está vazia
 		if (admin.getSenha().equals(HashUtil.hash(""))) {
-			
+
 			if (!alteracao) {
 				// retira a parte antes do @ no e-mail
 				String parte = admin.getEmail().substring(0, admin.getEmail().indexOf("@"));
 				// "setar" a parte na senha do admin
 				admin.setSenha(parte);
 
-			}else {
-				//buscar senha atual no banco
+			} else {
+				// buscar senha atual no banco
 				String hash = repository.findById(admin.getId()).get().getSenha();
-				//"setar" o hash na senha
+				// "setar" o hash na senha
 				admin.setSenhaComHash(hash);
 			}
 		}
@@ -130,21 +131,30 @@ public class AdminController {
 		repository.deleteById(id);
 		return "redirect:listaAdm/1";
 	}
+	@Publico
 	@RequestMapping("login")
 	public String login(Administrador admLogin, RedirectAttributes attr, HttpSession session) {
-		//buscar o Administrador no banco de dados
+		// buscar o Administrador no banco de dados
 		Administrador admin = repository.findByEmailAndSenha(admLogin.getEmail(), admLogin.getSenha());
-		if(admin == null) {
+		if (admin == null) {
 			attr.addFlashAttribute("mensagemErro", "Login e/ou senha inválido(s)");
 			return "redirect:/";
-		}else {
-			//salva o administrador na sessão
+		} else {
+			// salva o administrador na sessão
 			session.setAttribute("usuarioLogado", admin);
-			return "redirect:/listarRestaurante/1";
-			
+
+			return "redirect:/listaRestaurante/1";
 		}
-		
-		
+
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		// invalida a sessão
+		session.invalidate();
+		// voltar para a página inicial
+		return "redirect:/";
+
 	}
 
 }

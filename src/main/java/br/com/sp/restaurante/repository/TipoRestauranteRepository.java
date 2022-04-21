@@ -17,4 +17,5 @@ public interface TipoRestauranteRepository extends PagingAndSortingRepository<Ti
 	
 	public List<TipoRestaurante> findAllByOrderByNomeAsc();
 	
+	
 }

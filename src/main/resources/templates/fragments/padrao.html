@@ -6,7 +6,21 @@
 </head>
 <body>
 	<header th:fragment="cabecalho">
-	
+		<nav>
+			<div>
+				<a>Guide-Resta Admin</a>
+				
+				<ul th:if="${session.usuarioLogado != null}">
+					<li><a href="/listaAdm/1">Administradores</a></li>
+					<li><a href="/listaRest/1">Tipos de Restaurante</a></li>
+					<li><a href="/listaRestaurante/1">Restaurantes</a></li>
+					<li><a href="/logout">Sair</a></li>
+					
+				</ul>
+			</div>
+		
+		
+		</nav>
 	</header>
 
 <footer th:fragment="rodape">
