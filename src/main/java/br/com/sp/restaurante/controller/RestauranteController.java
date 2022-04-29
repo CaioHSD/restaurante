@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.sp.restaurante.annotation.Publico;
 import br.com.sp.restaurante.model.Restaurante;
 import br.com.sp.restaurante.model.TipoRestaurante;
 import br.com.sp.restaurante.repository.RestauranteRepository;
@@ -33,7 +34,7 @@ public class RestauranteController {
 	@Autowired
 	private FireBaseUtil fireUtil;
 	
-	
+	@Publico
 	@RequestMapping("formularioRestaurante")
 	public String form(Model model) {
 		model.addAttribute("tipos", repTipo.findAllByOrderByNomeAsc());
@@ -41,6 +42,7 @@ public class RestauranteController {
 
 		
 	}
+	@Publico
 	@RequestMapping(value = "salvarRestaurante" , method = RequestMethod.POST)
 	public String salvarRestaurante(Restaurante restaurante, @RequestParam("fileFotos") MultipartFile[] fileFotos) {
 		//String para armazenar as URL´s
@@ -72,6 +74,7 @@ public class RestauranteController {
 		
 		
 	}
+	@Publico
 	@RequestMapping("listaRestaurante/{page}")
 	public String listaRestaurante(Model model,  @PathVariable("page") int page) {
 		// cria um pageable informando os parâmeros da pagina
@@ -107,6 +110,7 @@ public class RestauranteController {
 		return "listaRestaurante";
 
 	}
+	@Publico
 	@RequestMapping(value = "buscarRestaurante", method = RequestMethod.GET)
 	public String buscarRestaurante(String restautaurante, Model model) {
 		model.addAttribute("restautaurante", repository.buscarRestaurante(restautaurante));
@@ -114,7 +118,7 @@ public class RestauranteController {
 
 	}
 	
-
+	@Publico
 	@RequestMapping("alterarRestaurante")
 	public String alterarRestaurante(Long id, Model model) {
 		System.out.println(id);
@@ -123,7 +127,7 @@ public class RestauranteController {
 		return "forward:formularioRestaurante";
 
 	}
-
+	@Publico
 	@RequestMapping("excluirRestaurante")
 	public String excluirRestaurante(Long idRestaurante) {
 		Restaurante rest = repository.findById(idRestaurante).get();
@@ -137,6 +141,7 @@ public class RestauranteController {
 		return "redirect:listaRestaurante/1";
 		
 	}
+	@Publico
 	@RequestMapping("excluirFotos")
 	public String excluirFotos(Long idRest, int numFoto, Model model) {
 		//busca o restaurante
@@ -155,6 +160,7 @@ public class RestauranteController {
 		return "forward:formularioRestaurante";
 		
 	}
+	
 
 	
 	
