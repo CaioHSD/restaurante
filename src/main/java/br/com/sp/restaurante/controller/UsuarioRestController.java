@@ -1,6 +1,9 @@
 package br.com.sp.restaurante.controller;
 
 import java.net.URI;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+
 import br.com.sp.restaurante.annotation.Privado;
 import br.com.sp.restaurante.annotation.Publico;
 import br.com.sp.restaurante.model.Erro;
 import br.com.sp.restaurante.model.Restaurante;
+import br.com.sp.restaurante.model.TokenJWT;
 import br.com.sp.restaurante.model.Usuario;
 import br.com.sp.restaurante.repository.UsuarioRepository;
 
@@ -26,6 +33,10 @@ import br.com.sp.restaurante.repository.UsuarioRepository;
 @RequestMapping("/api/usuario")
 public class UsuarioRestController {
 
+	public static final String EMISSOR = "SENAI";
+	public static final String SECRET = "M3u@c3$$0";
+	
+	
 	@Autowired
 	private UsuarioRepository repository;
 	
@@ -85,5 +96,33 @@ public class UsuarioRestController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@Publico
+	@RequestMapping(value="/login", method = RequestMethod .POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<TokenJWT> logar(@RequestBody Usuario usuario){
+		// buscar o usuario no banco de dados
+		usuario = repository.findByEmailAndSenha(usuario.getEmail(), usuario.getSenha());
+		//verifica se o usuario não é nulo
+		if(usuario != null) {
+			//variável para inserir dados no payload
+			Map<String, Object> payload = new HashMap<String, Object>();
+			payload.put("id_user", usuario.getId());
+			payload.put("name", usuario.getNome());
+			
+			//variável para a data de expiração
+			Calendar expiracao = Calendar.getInstance();
+			//adiciona
+			expiracao.add(Calendar.HOUR, 1);
+			//algoitmo para assinar o token
+			Algorithm algoritmo = Algorithm.HMAC256(SECRET);
+			//cria o objeto para receber o token
+			TokenJWT tokenJwt = new TokenJWT();
+			//gera o token
+			tokenJwt.setToken(JWT.create().withPayload(payload).withIssuer(EMISSOR).withExpiresAt(expiracao.getTime()).sign(algoritmo));
+			return ResponseEntity.ok(tokenJwt);
+			
+		}else {
+			return new ResponseEntity<TokenJWT>(HttpStatus.UNAUTHORIZED);
+		}
+	}
 	
 }
